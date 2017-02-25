@@ -19,7 +19,7 @@ namespace QuizAsp.Concrete
             db.Answer.Add(answer);
             db.Test.Add(test);
             db.Question.Add(question);
-
+            db.SaveChanges();
 
 
             //   db.Question.Add();
