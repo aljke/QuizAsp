@@ -21,7 +21,7 @@ namespace QuizAsp.Concrete
             db.Question.Add(question);
             db.SaveChanges();
 
-
+            //Seed(db);
             //   db.Question.Add();
         }
     }

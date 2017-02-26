@@ -10,6 +10,7 @@ namespace QuizAsp.Entities
         public QuizModel()
             : base("name=QuizModel")
         {
+            
         }
 
         public virtual DbSet<Answer> Answer { get; set; }
