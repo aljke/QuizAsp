@@ -1,4 +1,6 @@
-﻿<body>
+﻿@model List<QuizAsp.Entities.Test>
+
+<body>
     <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
@@ -7,15 +9,15 @@
                         List of tests
                     </a>
                 </li>
-                <li>
-                    <a href="#">Test 1</a>
-                </li>
-                <li>
-                    <a href="#">test 2</a>
-                </li>
-                <li>
-                    <a href="#">test 3</a>
-                </li>
+                @foreach (var test in Model)
+                {
+                    <li>
+                        <a href="@Url.Action("Index", "Test", new { id = test.Id })">
+                            @string.Format("{0} ({1})", test.Caption, test.Question.Count)
+                        </a>
+                    </li>
+                }
+                
                 <li>
                     <a href="#">test 4</a>
                 </li>

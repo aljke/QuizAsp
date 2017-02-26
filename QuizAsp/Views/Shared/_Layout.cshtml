@@ -28,7 +28,8 @@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
-            @Html.Partial("Simple-sidebar")
+
+            @Html.Action("SimpleSidebar", "Home")
         </div>
     </div>
     <div class="container body-content">
