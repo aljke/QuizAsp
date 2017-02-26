@@ -28,14 +28,12 @@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
+            @Html.Partial("Simple-sidebar")
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
