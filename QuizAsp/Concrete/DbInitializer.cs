@@ -23,7 +23,7 @@ namespace QuizAsp.Concrete
             }
             db.SaveChanges();
 
-
+            //Seed(db);
             //   db.Question.Add();
         }
     }
