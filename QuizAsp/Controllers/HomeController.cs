@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuizAsp.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,6 +26,13 @@ namespace QuizAsp.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        
+        public ActionResult SimpleSidebar()
+        {
+            var model = new QuizModel().Test.ToList();
+
+            return PartialView("Simple-sidebar", model);
         }
     }
 }
