@@ -73,6 +73,14 @@ namespace QuizAsp.Controllers
             return View(test);
         }
 
+        public ActionResult Information(int id)
+        {
+            var model = new QuizModel();
+            var currentTestInfo = model.Test.Where(x => x.Id == id).First();
+
+            return View(currentTestInfo);
+        }
+
         // POST: Tests/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
