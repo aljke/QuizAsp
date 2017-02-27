@@ -1,0 +1,24 @@
+﻿@model QuizAsp.Entities.Test
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>
+            @Model.Caption
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p class="lead">
+            There is @Model.Question.Count question in current test.
+            Please pay attention to limit of the time.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <p>
+        <a class="btn btn-primary btn-lg">
+            Start Test
+        </a>
+    </p>
+</div>
