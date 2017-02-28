@@ -1,0 +1,34 @@
+﻿@model QuizAsp.Entities.Test
+
+@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Model.Caption</title>
+</head>
+<body>
+    <h1>@Model.Caption</h1>
+    <h2>@Model.Timer</h2>
+    <div> 
+        @using (Html.BeginForm("Grade", "Quiz", FormMethod.Post))
+        {
+            foreach (var question in @Model.Question)
+            {
+                <div>@question.Text</div>
+                foreach (var answer in question.Answer)
+                {
+                    <div>
+                       @Html.CheckBox("answer", false, new { value = answer.Id }) @answer.Text<br />
+                    </div>
+                }
+                <br/>
+            }
+            <input type="submit" value="submit" />
+        }
+    </div>
+</body>
+</html>
