@@ -1,5 +1,4 @@
-﻿using QuizAsp.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,18 +7,12 @@ namespace QuizAsp.Models
 {
     public class QuestionViewModel
     {
-        public Question question { get; }
-        public bool IsChecked;
+        public int Id { get; set; }
 
-        public QuestionViewModel()
-        {
-                   
-        }
+        public string Text { get; set; }
 
-        public QuestionViewModel(Question question)
-        {
-            this.question = question;
-            IsChecked = false;
-        }
+        public int TestId { get; set; }
+
+        public virtual ICollection<AnswerViewModel> Answer { get; set; }
     }
 }

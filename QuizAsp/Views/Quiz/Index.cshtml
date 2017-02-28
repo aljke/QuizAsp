@@ -1,4 +1,4 @@
-﻿@model QuizAsp.Entities.Test
+﻿@model IEnumerable<QuizAsp.Models.QuestionViewModel>
 
 @{ 
     Layout = null;
@@ -8,21 +8,21 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@Model.Caption</title>
+    <title>@ViewBag.Title</title>
 </head>
 <body>
-    <h1>@Model.Caption</h1>
-    <h2>@Model.Timer</h2>
+    <h1>@ViewBag.Title</h1>
+    <h2>@ViewBag.Timer</h2>
     <div> 
         @using (Html.BeginForm("Grade", "Quiz", FormMethod.Post))
         {
-            foreach (var question in @Model.Question)
+            foreach (var userQuestion in @Model)
             {
-                <div>@question.Text</div>
-                foreach (var answer in question.Answer)
+                <div>@userQuestion.Text</div>
+                foreach (var answer in userQuestion.Answer)
                 {
                     <div>
-                       @Html.CheckBox("answer", false, new { value = answer.Id }) @answer.Text<br />
+                        @Html.EditorFor(ans => answer.IsChecked) @answer.Text <br />
                     </div>
                 }
                 <br/>
