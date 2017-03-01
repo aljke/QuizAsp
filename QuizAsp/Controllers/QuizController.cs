@@ -10,7 +10,7 @@ namespace QuizAsp.Controllers
 {
     public class QuizController : Controller
     {
-        IEnumerable<QuestionViewModel> model;
+        
 
         // GET: Quiz
         public ActionResult Index(int id = 1)
@@ -21,7 +21,7 @@ namespace QuizAsp.Controllers
             ViewBag.Title = selectedTest.Caption;
             ViewBag.Timer = selectedTest.Timer;
             var questions = selectedTest.Question;
-            model = questions.Select(x => new QuestionViewModel
+            var model = questions.Select(x => new QuestionViewModel
             {
                 Answer = x.Answer.Select(
                 y => new AnswerViewModel
@@ -36,20 +36,27 @@ namespace QuizAsp.Controllers
                 Id = x.Id,
                 TestId = x.TestId,
                 Text = x.Text
-            });
+            }).ToList();
             TempData["model"] = model;
             return View(model);
         }
 
         
+        [HttpPost]
+        public ActionResult Index(IList<QuestionViewModel> model)
+        {
+            return null;
+        }
+        
+        /*
         public ActionResult Grade()
         {
-            model = (IEnumerable<QuestionViewModel>)TempData["model"];
+            var model = (IEnumerable<QuestionViewModel>)TempData["model"];
             int grade = model.Count(x => x == (x.Answer.Where(y => y.IsChecked == y.IsCorrect)));
             //var grade = model == null;
            // var m = model.First().Answer.First().IsChecked.ToString();
             ViewBag.grade = grade;
             return View();
-        }
+        }*/
     }
 }

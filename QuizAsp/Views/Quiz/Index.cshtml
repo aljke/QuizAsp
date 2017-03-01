@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QuizAsp.Models.QuestionViewModel>
+﻿@model IList<QuizAsp.Models.QuestionViewModel>
 
 @{ 
     Layout = null;
@@ -14,15 +14,16 @@
     <h1>@ViewBag.Title</h1>
     <h2>@ViewBag.Timer</h2>
     <div> 
-        @using (Html.BeginForm("Grade", "Quiz", FormMethod.Post))
+        @using (Html.BeginForm("Index", "Quiz", FormMethod.Post))
         {
-            foreach (var userQuestion in @Model)
+            @Html.AntiForgeryToken()
+            for (int i = 0; i < Model.Count; i++)
             {
-                <div>@userQuestion.Text</div>
-                foreach (var answer in userQuestion.Answer)
+                <div>@Model[i].Text</div>
+                for (int j = 0; j < Model[i].Answer.Count; j++)
                 {
                     <div>
-                        @Html.EditorFor(ans => answer.IsChecked) @answer.Text <br />
+                        @Html.CheckBoxFor(ans => Model[i].Answer.ElementAt(j).IsChecked) @Html.DisplayFor(x => @Model[i].Answer.ElementAt(j).Text) <br />
                     </div>
                 }
                 <br/>
