@@ -27,6 +27,11 @@ namespace QuizAsp
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/simple-sidebar.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.css.css",
+                      "~/Content/site.css",
+                      "~/Content/bootstrap-checkboxes.css"));
         }
     }
 }

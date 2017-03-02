@@ -89,7 +89,7 @@ namespace QuizAsp.Controllers
             {
                 if (q.Answer.All(x => x.IsChecked == x.IsCorrect)) grade++;
             }
-            return Content(grade.ToString());
+            return View(model);
         }
         
         /*
