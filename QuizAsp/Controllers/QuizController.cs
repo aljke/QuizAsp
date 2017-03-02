@@ -37,14 +37,52 @@ namespace QuizAsp.Controllers
                 TestId = x.TestId,
                 Text = x.Text
             }).ToList();
-            TempData["model"] = model;
+
+            TempData["TestId"] = id;
             return View(model);
         }
 
         
         [HttpPost]
-        public ActionResult Index(IList<QuestionViewModel> model)
+        public ActionResult Index2(IList<QuestionViewModel> model)
         {
+            
+            int testId = (int)TempData["TestId"];
+            var questions = new QuizModel().Question.Where(x => x.TestId == testId).ToList();
+
+            /*
+            var modell = questions.Where(x => model.Where(y => x.Answer.Where(z => y.Answer.Where(o => o.Id == z.Id)
+            .Select(r => new AnswerViewModel {IsCorrect = z.IsCorrect, IsChecked = r.IsChecked})))).ToList();*/
+
+            
+            var mode = from question in questions.AsEnumerable().ToList()
+                       from answers in question.Answer
+                       from item in model
+                       from userAnswer in item.Answer
+                       where answers.Id == userAnswer.Id
+                       select new AnswerViewModel
+                       {
+                           Id = answers.Id,
+                           IdQuestion = answers.IdQuestion,
+                           IsChecked = userAnswer.IsChecked,
+                           IsCorrect = answers.IsCorrect,
+                           Text = answers.Text,
+                           Question = answers.Question
+                       };
+            Question a;         
+            for (int i = 0; i < model.Count; i++)
+            {
+                for(int j = 0; j < model[i].Answer.Count; j++)
+                {
+                    var viewAnswer = model[i].Answer[j];
+                    /*
+                    var dbQuestion = questions.Where(x => x.Id == model[i].Id).First();
+                    var dbAnswer = dbQuestion.Answer.Where(x => x.Id == viewAnswer.Id).First();*/
+                    a = questions.Where(x => x.Answer.Any(y => y.Id == viewAnswer.Id)).First();
+
+                }
+            }         
+                 
             return null;
         }
         

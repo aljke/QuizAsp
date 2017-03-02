@@ -14,16 +14,18 @@
     <h1>@ViewBag.Title</h1>
     <h2>@ViewBag.Timer</h2>
     <div> 
-        @using (Html.BeginForm("Index", "Quiz", FormMethod.Post))
+        @using (Html.BeginForm("Index2", "Quiz", FormMethod.Post))
         {
-            @Html.AntiForgeryToken()
+     
             for (int i = 0; i < Model.Count; i++)
             {
                 <div>@Model[i].Text</div>
                 for (int j = 0; j < Model[i].Answer.Count; j++)
                 {
                     <div>
-                        @Html.CheckBoxFor(ans => Model[i].Answer.ElementAt(j).IsChecked) @Html.DisplayFor(x => @Model[i].Answer.ElementAt(j).Text) <br />
+                        @Html.HiddenFor(model => Model[i].Answer[j].Id)
+                        @Html.HiddenFor(model => Model[i].Answer[j].IdQuestion)
+                        @Html.CheckBoxFor(model => Model[i].Answer[j].IsChecked) @Html.DisplayFor(x => @Model[i].Answer[j].Text) <br />
                     </div>
                 }
                 <br/>
