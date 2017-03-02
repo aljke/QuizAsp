@@ -20,11 +20,11 @@
             for (int i = 0; i < Model.Count; i++)
             {
                 <div>@Model[i].Text</div>
+                @Html.HiddenFor(model => Model[i].Id)
                 for (int j = 0; j < Model[i].Answer.Count; j++)
                 {
                     <div>
                         @Html.HiddenFor(model => Model[i].Answer[j].Id)
-                        @Html.HiddenFor(model => Model[i].Answer[j].IdQuestion)
                         @Html.CheckBoxFor(model => Model[i].Answer[j].IsChecked) @Html.DisplayFor(x => @Model[i].Answer[j].Text) <br />
                     </div>
                 }

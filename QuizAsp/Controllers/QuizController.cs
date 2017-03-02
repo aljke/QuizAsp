@@ -48,13 +48,9 @@ namespace QuizAsp.Controllers
         {
             
             int testId = (int)TempData["TestId"];
-            var questions = new QuizModel().Question.Where(x => x.TestId == testId).ToList();
-
-            /*
-            var modell = questions.Where(x => model.Where(y => x.Answer.Where(z => y.Answer.Where(o => o.Id == z.Id)
-            .Select(r => new AnswerViewModel {IsCorrect = z.IsCorrect, IsChecked = r.IsChecked})))).ToList();*/
-
             
+            var questions = new QuizModel().Question.Where(x => x.TestId == testId).ToList();
+            /*
             var mode = from question in questions.AsEnumerable().ToList()
                        from answers in question.Answer
                        from item in model
@@ -69,21 +65,31 @@ namespace QuizAsp.Controllers
                            Text = answers.Text,
                            Question = answers.Question
                        };
-            Question a;         
+                  */  
             for (int i = 0; i < model.Count; i++)
             {
+                model[i].Text = questions.Where(x => x.Id == model[i].Id).First().Text; // get TextQuestion from DB
+
+                // prepare a new viewmodel for showing corrected answers to user
                 for(int j = 0; j < model[i].Answer.Count; j++)
                 {
                     var viewAnswer = model[i].Answer[j];
-                    /*
-                    var dbQuestion = questions.Where(x => x.Id == model[i].Id).First();
-                    var dbAnswer = dbQuestion.Answer.Where(x => x.Id == viewAnswer.Id).First();*/
-                    a = questions.Where(x => x.Answer.Any(y => y.Id == viewAnswer.Id)).First();
-
+                    var dbAnswer = questions.Where(x => x.Id == model[i].Id)
+                        .SelectMany(x => x.Answer)
+                        .Where(c => c.Id == viewAnswer.Id)
+                        .First();
+                    model[i].Answer[j].Text = dbAnswer.Text;
+                    model[i].Answer[j].Question = dbAnswer.Question;
+                    model[i].Answer[j].IsCorrect = dbAnswer.IsCorrect;
                 }
-            }         
-                 
-            return null;
+            }
+
+            int grade = 0;
+            foreach (var q in model)
+            {
+                if (q.Answer.All(x => x.IsChecked == x.IsCorrect)) grade++;
+            }
+            return Content(grade.ToString());
         }
         
         /*
