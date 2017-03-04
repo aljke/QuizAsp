@@ -13,6 +13,6 @@ namespace QuizAsp.Models
 
         public int TestId { get; set; }
 
-        public IList<AnswerViewModel> Answer { get; set; }
+        public IList<UserAnswer> Answer { get; set; }
     }
 }

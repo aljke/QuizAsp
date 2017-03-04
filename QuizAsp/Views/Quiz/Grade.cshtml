@@ -1,4 +1,4 @@
-﻿
+﻿@model IList<QuizAsp.Models.QuestionViewModel>
 @{
    
     Layout = null;
@@ -14,6 +14,10 @@
 <body>
     <div> 
         @ViewBag.grade
+        @using (Html.BeginForm("ViewAnswers", "Quiz", FormMethod.Post))
+        {
+            <input type="submit" value="View answers" />
+        }
     </div>
 </body>
 </html>

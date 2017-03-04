@@ -1,5 +1,6 @@
 namespace QuizAsp.Entities
 {
+    using Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -19,6 +20,6 @@ namespace QuizAsp.Entities
 
         public virtual Test Test { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }
