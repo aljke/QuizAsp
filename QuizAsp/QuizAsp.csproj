@@ -202,7 +202,6 @@
     <Compile Include="Controllers\AnswersController.cs" />
     <Compile Include="Controllers\EditQuizController.cs" />
     <Compile Include="Controllers\QuizController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
@@ -306,7 +305,7 @@
     <Content Include="Views\Questions\Edit.cshtml" />
     <Content Include="Views\Questions\Index.cshtml" />
     <Content Include="Views\Shared\Simple-sidebar.cshtml" />
-    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Tests\Information.cshtml" />
     <Content Include="Views\Quiz\Index.cshtml" />
     <Content Include="Views\Quiz\Grade.cshtml" />
     <Content Include="Views\Quiz\ViewAnswers.cshtml" />

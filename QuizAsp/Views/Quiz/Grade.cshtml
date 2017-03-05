@@ -13,7 +13,8 @@
 </head>
 <body>
     <div> 
-        @ViewBag.grade
+        <h1>YOUR RESULT IS @(ViewBag.TotalGrade + " (" + ViewBag.GradePercent + ")")</h1>
+        <br />
         @using (Html.BeginForm("ViewAnswers", "Quiz", FormMethod.Post))
         {
             <input type="submit" value="View answers" />

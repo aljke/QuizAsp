@@ -43,8 +43,17 @@ namespace QuizAsp.Controllers
         public ActionResult ViewAnswers()
         {
             var model = (IList<QuestionViewModel>)TempData["model"];
-            int testId = (int)TempData["TestId"];
             
+            
+           
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Grade(IList<QuestionViewModel> model)
+        {
+            int testId = (int)TempData["TestId"];
             var questions = new QuizModel().Question.Where(x => x.TestId == testId).ToList();
 
             for (int i = 0; i < model.Count; i++)
@@ -52,10 +61,10 @@ namespace QuizAsp.Controllers
                 model[i].Text = questions.Where(x => x.Id == model[i].Id).First().Text; // get TextQuestion from DB
 
                 // prepare a new viewmodel for showing corrected answers to user
-                for(int j = 0; j < model[i].Answer.Count; j++)
+                for (int j = 0; j < model[i].Answer.Count; j++)
                 {
                     var userAnswer = model[i].Answer[j];
-                    
+
                     var dbAnswer = questions.Where(x => x.Id == model[i].Id)
                         .SelectMany(x => x.Answer)
                         .Where(c => c.Id == userAnswer.Id)
@@ -66,19 +75,21 @@ namespace QuizAsp.Controllers
                 }
             }
 
-            return View(model);
-        }
 
-        [HttpPost]
-        public ActionResult Grade(IList<QuestionViewModel> model)
-        {
-            TempData["model"] = model;
-            int grade = 0;
+           
+            float grade = 0;
             foreach (var q in model)
             {
                 if (q.Answer.All(x => x.IsChecked == x.IsCorrect)) grade++;
             }
+            string totalGrade = grade + "/" + model.Count;
+            string gradePercent =  ((int)(grade / model.Count * 100) + "%");
+            ViewBag.TotalGrade = totalGrade;
+            ViewBag.GradePercent = gradePercent;
+
+            TempData["model"] = model;
             return View(model);
+
         }
     }
 }
