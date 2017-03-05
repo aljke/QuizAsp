@@ -85,7 +85,8 @@ namespace QuizAsp.Controllers
                 if (q.Answer.All(x => x.IsChecked == x.IsCorrect)) grade++;
             }
             string totalGrade = grade + "/" + model.Count;
-            string gradePercent =  ((int)(grade / model.Count * 100) + "%");
+            int gradePercent = (int)(grade / model.Count * 100);
+            //string gradePercent =  ((int)(grade / model.Count * 100) + "%");
             ViewBag.TotalGrade = totalGrade;
             ViewBag.GradePercent = gradePercent;
 
@@ -93,13 +94,20 @@ namespace QuizAsp.Controllers
             var userId = User.Identity.GetUserId();
             var currentUser = context.Users.First(x => x.Id == userId);
 
+
+            int gradeToDb = 0;
+            if (gradePercent >= 90) gradeToDb = 5;
+            else if (gradePercent < 90 && gradePercent > 80) gradeToDb = 4;
+            else if (gradePercent <= 80 && gradePercent > 70) gradeToDb = 3;
+            else gradeToDb = 2;
+
             var myContext = new QuizModel();
             TestResult res = new TestResult
             {
                 Date = DateTime.Now,
                 UserId = currentUser.Id,
-                Test = myContext.Test.First(x => x.Id == 1),
-                Grade = 10
+                Test = myContext.Test.First(x => x.Id == testId),
+                Grade = gradeToDb
             };
             myContext.TestResult.Add(res);
             myContext.SaveChanges();

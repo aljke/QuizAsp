@@ -12,36 +12,39 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <div>
         @for (int i = 0; i < Model.Count; i++)
         {
-            <div>@Model[i].Text</div>
+            <div>@((i + 1) + ". ") @Model[i].Text</div>
             for (int j = 0; j < Model[i].Answer.Count; j++)
             {
                 <div>
                     @if (Model[i].Answer[j].IsChecked && Model[i].Answer[j].IsCorrect)
                     {
-                       
-                        @Html.CheckBox("chk", true, new { disabled = "disabled"});
-                        <span>+</span>
-                    }
-                    else if (Model[i].Answer[j].IsCorrect){
+                        <span><b>+</b></span>
                         @Html.CheckBox("chk", true, new { disabled = "disabled" });
-                        <span>missed</span>
+
+                    }
+                    else if (Model[i].Answer[j].IsCorrect)
+                    {
+                        <span><b>missed</b></span>
+                        @Html.CheckBox("chk", true, new { disabled = "disabled" });
+
                     }
                     else if (!Model[i].Answer[j].IsCorrect && Model[i].Answer[j].IsChecked)
                     {
+                        <span><b>-</b></span>
                         @Html.CheckBox("chk", true, new { disabled = "disabled" });
-                        <span>-</span>
                     }
                     else
                     {
                         @Html.CheckBox("chk", false, new { disabled = "disabled" });
                     }
                     @Html.DisplayFor(x => @Model[i].Answer[j].Text)
-                            <hr />
-                    </div>
+                </div>
             }
-            <br />
+            <hr />
         }
+    </div>
 </body>
 </html>
