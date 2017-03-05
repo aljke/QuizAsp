@@ -1,4 +1,6 @@
-﻿using QuizAsp.Entities;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using QuizAsp.Entities;
 using QuizAsp.Models;
 using System;
 using System.Collections.Generic;
@@ -87,7 +89,23 @@ namespace QuizAsp.Controllers
             ViewBag.TotalGrade = totalGrade;
             ViewBag.GradePercent = gradePercent;
 
+            var context = new ApplicationDbContext();
+            var userId = User.Identity.GetUserId();
+            var currentUser = context.Users.First(x => x.Id == userId);
+
+            var myContext = new QuizModel();
+            TestResult res = new TestResult
+            {
+                Date = DateTime.Now,
+                UserId = currentUser.Id,
+                Test = myContext.Test.First(x => x.Id == 1),
+                Grade = 10
+            };
+            myContext.TestResult.Add(res);
+            myContext.SaveChanges();
+
             TempData["model"] = model;
+
             return View(model);
 
         }
