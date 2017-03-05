@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Statistic";
+}
+
+<h2>Statistical information</h2>
+@using (Html.BeginForm("Index", "Statistic", FormMethod.Post))
+{
+<span>Select test:</span> @Html.DropDownList("TestId", ViewBag.Tests as SelectList,"Select Test" )
+    <p>
+        <span>Quantity of tests with 5 grade:</span> @ViewBag.excellent
+    </p>
+    <p>
+        <span>Quantity of tests with 4 grade:</span> @ViewBag.good
+    </p>
+    <p>
+        <span>Quantity of tests with 3 grade:</span> @ViewBag.norm
+    </p>
+    <p>
+        <span>Quantity of tests with 2 grade:</span> @ViewBag.bad
+    </p>
+    <input type="submit" value="show" />
+}

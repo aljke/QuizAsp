@@ -205,6 +205,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
+    <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Controllers\TestsController.cs" />
     <Compile Include="Entities\Answer.cs" />
     <Compile Include="Entities\Question.cs" />
@@ -309,6 +310,7 @@
     <Content Include="Views\Quiz\Index.cshtml" />
     <Content Include="Views\Quiz\Grade.cshtml" />
     <Content Include="Views\Quiz\ViewAnswers.cshtml" />
+    <Content Include="Views\Statistic\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\EditQuiz\" />
