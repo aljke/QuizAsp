@@ -1,5 +1,7 @@
 namespace QuizAsp.Entities
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -13,12 +15,14 @@ namespace QuizAsp.Entities
 
         public int TestId { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         public DateTime Date { get; set; }
 
+        public int Grade { get; set; }
+
         public virtual Test Test { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual IdentityUser User { get; set; }
     }
 }

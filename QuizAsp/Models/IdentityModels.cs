@@ -21,7 +21,7 @@ namespace QuizAsp.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("QuizModel", throwIfV1Schema: false)
         {
         }
 

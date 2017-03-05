@@ -20,6 +20,14 @@ namespace QuizAsp.Controllers
             return View(db.Test.ToList());
         }
 
+        public ActionResult Information(int id)
+        {
+            var model = new QuizModel();
+            var currentTestInfo = model.Test.Where(x => x.Id == id).First();
+
+            return View(currentTestInfo);
+        }
+
         // GET: Tests/Details/5
         public ActionResult Details(int? id)
         {

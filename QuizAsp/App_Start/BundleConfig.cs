@@ -27,6 +27,7 @@ namespace QuizAsp
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/simple-sidebar.css"));
+
         }
     }
 }
