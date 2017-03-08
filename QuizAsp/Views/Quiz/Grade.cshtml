@@ -1,0 +1,24 @@
+﻿@model IList<QuizAsp.Models.QuestionViewModel>
+@{
+   
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Grade</title>
+</head>
+<body>
+    <div> 
+        <h1>YOUR RESULT IS @(ViewBag.TotalGrade + " (" + ViewBag.GradePercent + "%)")</h1>
+        <br />
+        @using (Html.BeginForm("ViewAnswers", "Quiz", FormMethod.Post))
+        {
+            <input type="submit" value="View answers" />
+        }
+    </div>
+</body>
+</html>

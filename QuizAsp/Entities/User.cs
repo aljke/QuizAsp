@@ -6,6 +6,7 @@ namespace QuizAsp.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    /*
     [Table("User")]
     public partial class User
     {
@@ -27,5 +28,5 @@ namespace QuizAsp.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TestResult> TestResult { get; set; }
-    }
+    }*/
 }

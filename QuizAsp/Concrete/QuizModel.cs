@@ -4,8 +4,9 @@ namespace QuizAsp.Entities
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-
-    public partial class QuizModel : DbContext
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
+    public partial class QuizModel : IdentityDbContext<ApplicationUser>
     {
         public QuizModel()
             : base("name=QuizModel")
@@ -17,7 +18,7 @@ namespace QuizAsp.Entities
         public virtual DbSet<Question> Question { get; set; }
         public virtual DbSet<Test> Test { get; set; }
         public virtual DbSet<TestResult> TestResult { get; set; }
-        public virtual DbSet<User> User { get; set; }
+       // public virtual DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -30,11 +31,18 @@ namespace QuizAsp.Entities
                 .HasMany(e => e.TestResult)
                 .WithRequired(e => e.Test)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<User>()
+            
+            /*
+            modelBuilder.Entity<ApplicationUser>()
                 .HasMany(e => e.TestResult)
-                .WithRequired(e => e.User)
-                .WillCascadeOnDelete(false);
+                .WithRequired(e => e.U)
+                .WillCascadeOnDelete(false);*/
+
+            modelBuilder.Configurations.Add(new IdentityUserLoginConfiguration());
+            modelBuilder.Configurations.Add(new IdentityUserRoleConfiguration());
+
+            Database.SetInitializer<QuizModel>(null);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

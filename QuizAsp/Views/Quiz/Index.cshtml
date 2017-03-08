@@ -1,0 +1,37 @@
+﻿@model IList<QuizAsp.Models.QuestionViewModel>
+
+@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h1>@ViewBag.Title</h1>
+    <h2>@ViewBag.Timer</h2>
+    <div> 
+        @using (Html.BeginForm("Grade", "Quiz", FormMethod.Post))
+        {
+
+            for (int i = 0; i < Model.Count; i++)
+            {
+                <div>@((i + 1) + ". ") @Model[i].Text</div>
+                @Html.HiddenFor(model => Model[i].Id)
+                for (int j = 0; j < Model[i].Answer.Count; j++)
+                {
+                    <div>
+                        @Html.HiddenFor(model => Model[i].Answer[j].Id)
+                        @Html.CheckBoxFor(model => Model[i].Answer[j].IsChecked) @Html.DisplayFor(x => @Model[i].Answer[j].Text) <br />
+                    </div>
+                }
+                <br/>
+            }
+            <input type="submit" value="submit" />
+        }
+    </div>
+</body>
+</html>
