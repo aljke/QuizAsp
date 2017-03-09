@@ -54,7 +54,7 @@ namespace QuizAsp.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Caption,Timer")] Test test)
+        public ActionResult Create([Bind(Include = "Id,Caption,Timer,Question")] Test test)
         {
             if (ModelState.IsValid)
             {

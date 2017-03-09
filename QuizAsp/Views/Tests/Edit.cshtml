@@ -32,7 +32,17 @@
                 @Html.ValidationMessageFor(model => model.Timer, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        @foreach (var question in Model.Question)
+        {
+            @Html.Label("Question")<br />
+            @Html.EditorFor(model => question.Text, new { style = "width:auto" })<br />
+            @Html.Label("Answers")<br />
+            foreach (var answer in question.Answer)
+            {
+                @Html.EditorFor(model => answer.Text, new { style = "width: 270px;" })
+                @Html.EditorFor(model => answer.IsCorrect)<br />
+            }
+        }
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />

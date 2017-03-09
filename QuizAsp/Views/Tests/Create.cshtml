@@ -1,5 +1,5 @@
 ﻿@model QuizAsp.Entities.Test
-
+<script src="~/Scripts/AddQuestion.js"></script>
 @{
     ViewBag.Title = "Create";
 }
@@ -30,7 +30,22 @@
                 @Html.ValidationMessageFor(model => model.Timer, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div>
+            <div class="f" id="f">
+                <label id="question">Question</label><br />
+                <input id="Question[0].Text" name="Question[0].Text" type="text" value=""  style="width:auto;"  /> <br />
 
+                <label id="answer">Answer</label><br />
+
+                <input id="Question[0].Answer[0].Text" name="Question[0].Answer[0].Text" type="text" value=""  style="width: 250px;" /> @Html.CheckBox("Question[0].Answer[0].IsCorrect", false) <br />
+                <input id="Question[0].Answer[1].Text" name="Question[0].Answer[1].Text" type="text" value=""  style="width: 250px;" /> @Html.CheckBox("Question[0].Answer[1].IsCorrect", false)<br />
+                <input id="Question[0].Answer[2].Text" name="Question[0].Answer[2].Text" type="text" value=""  style="width: 250px;" />    @Html.CheckBox("Question[0].Answer[2].IsCorrect", false)<br />
+                <input id="Question[0].Answer[3].Text" name="Question[0].Answer[3].Text" type="text" value=""  style="width: 250px;" />    @Html.CheckBox("Question[0].Answer[3].IsCorrect", false)<br />
+
+            </div>
+
+            <input type="button" value="Add Question" id="but" onclick="get()" />
+        </div> 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
